@@ -8,10 +8,13 @@ Lo que hacía antes con el alias init:
 
 Lo voy a simplificar clonando directamente este proyecto.
 
-```alias initproject="git clone https://github.com/jorgeatgu/base.git . && git remote rm origin && npm install"```
+```alias initproject="git clone https://github.com/jorgeatgu/base.git . && git remote rm origin && npm install && sudo ncu -u"```
 
 ### Gifs
 
+Creando la carpeta y lanzando el alias ```initproject```
   ![](https://github.com/jorgeatgu/base/blob/master/initproject-uno.gif)
+
+Completando la instalación de las dependencias y actualizandolas al instante.
 
   ![](https://github.com/jorgeatgu/base/blob/master/initproject-dos.gif)
