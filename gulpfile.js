@@ -1,110 +1,119 @@
-var gulp = require('gulp'),
-	autoprefixer = require('gulp-autoprefixer');
-newer = require('gulp-newer');
-imagemin = require('gulp-imagemin');
-pngquant = require('imagemin-pngquant');
-sass = require('gulp-sass');
-cssnano = require('gulp-cssnano');
+var gulp = require('gulp');
+postcss = require('gulp-postcss');
+autoprefixer = require('gulp-autoprefixer');
 sourcemaps = require('gulp-sourcemaps');
+atImport = require('postcss-import');
+postCSS_InlineComment = require('postcss-inline-comment');
+cssnext = require('postcss-cssnext');
+sorting = require('postcss-sorting');
+nested = require('postcss-nested');
+pxtorem = require('postcss-pxtorem');
+uglify = require('gulp-uglify');
+newer = require('gulp-newer');
 rename = require('gulp-rename');
+nano = require('gulp-cssnano');
 notify = require("gulp-notify");
-bourbon = require("node-bourbon").includePaths;
-browserSync = require("browser-sync");
 
-gulp.task("browserSync", function() {
-	browserSync({
-		server: {
-			baseDir: "./"
-		}
-	})
-});
 
-//Notificando errores de CSS
-function errorAlertPost(error) {
-	notify.onError({
-		title: "SCSS",
-		subtitle: "Algo esta mal en tu CSS!",
-		sound: "Basso"
-	})(error);
-	console.log(error.toString());
-	this.emit("end");
+var imgSrc = './src/img/*';
+var imgDist = './img';
+var jsSrc = './src/js/*.js';
+var jsDist = './js';
+
+function errorAlertJS(error) {
+    notify.onError({
+        title: "Gulp JavaScript",
+        subtitle: "Algo esta mal en tu JavaScript!",
+        sound: "Basso"
+    })(error);
+    console.log(error.toString());
+    this.emit("end");
 };
 
+function errorAlertPost(error) {
+    notify.onError({
+        title: "Gulp postCSS",
+        subtitle: "Algo esta mal en tu CSS!",
+        sound: "Basso"
+    })(error);
+    console.log(error.toString());
+    this.emit("end");
+};
 
-//Optimizando todas las imagenes en formato SVG, PNG, JPG y GIF
+gulp.task('compress', function() {
+    return gulp.src(jsSrc)
+        .pipe(uglify())
+        .on("error", errorAlertJS)
+        .pipe(gulp.dest(jsDist))
+        .pipe(notify({
+            message: 'JavaScript complete'
+        }));
+
+});
+
+gulp.task('css', function() {
+    var processors = [
+        atImport,
+        nested,
+        cssnext,
+        pxtorem({
+            root_value: 16,
+            unit_precision: 2,
+            prop_white_list: ['font', 'font-size', 'line-height', 'letter-spacing', 'margin', 'padding'],
+            replace: true,
+            media_query: false
+        }),
+        sorting({
+            "sort-order": "csscomb"
+        }),
+        autoprefixer
+    ];
+    return gulp.src('./src/css/styles.css')
+
+    .pipe(sourcemaps.init())
+        .pipe(postcss(processors))
+        .on("error", errorAlertPost)
+        .pipe(sourcemaps.write('./css', {
+            sourceRoot: '/src'
+        }))
+        .pipe(gulp.dest('./css'))
+        .pipe(notify({
+            message: 'postCSS complete'
+        }));
+});
+
+gulp.task('minify', function() {
+    return gulp.src('./css/styles.css')
+        .pipe(nano())
+        .pipe(gulp.dest('./css'))
+        .pipe(notify({
+            message: 'CSSnano task complete'
+        }));
+});
+
 gulp.task('imagemin', function() {
-	return gulp.src('img/*')
-		.pipe(imagemin({
-			progressive: true,
-			svgoPlugins: [{
-				removeViewBox: false
-			}],
-			use: [pngquant()]
-		}))
-		.pipe(gulp.dest('src/img'));
+    return gulp.src(imgSrc)
+        .pipe(imagemin({
+            progressive: true,
+            svgoPlugins: [{
+                removeViewBox: false
+            }],
+            use: [pngquant()]
+        }))
+        .pipe(gulp.dest(imgDist));
 });
 
 
-//Incluyendo prefijos CSS a todas las propiedades que lo necesiten
-gulp.task('autoprefixer', function() {
-	//Ruta de nuestro archivo CSS
-	return gulp.src('css/*.css')
-		.pipe(autoprefixer({
-			browsers: ['last 2 versions'],
-			cascade: false
-		}))
-		//ruta donde dejaremos los archivos con prefijos
-		.pipe(gulp.dest('/css/'));
-});
 
-gulp.task("sass", function() {
-	gulp.src("src/scss/*.scss")
-		.pipe(sourcemaps.init())
-		.pipe(sass({
-			includePaths: bourbon
-		}))
-		.on("error", errorAlertPost)
-		.pipe(sourcemaps.write('.'))
-		.pipe(gulp.dest("css/"))
-		.pipe(browserSync.reload({
-			stream: true
-		}))
-		.pipe(notify({
-			message: 'SCSS complete'
-		}));
-});
-
-//Comprimiendo los CSS
-gulp.task('mincss', function() {
-	return gulp.src('css/styles.css')
-		.pipe(sourcemaps.init())
-		.pipe(cssnano())
-		.pipe(rename({
-			suffix: '.min'
-		}))
-		.pipe(sourcemaps.write('.'))
-		.pipe(gulp.dest('css/'));
-});
-
-
-//Cada vez que incluyamos una nueva imagen solo esta sera optimizada por imagemin, las que ya estén optimizadas serán excluídas del proceso
-var imgSrc = 'img/**';
-var imgDest = 'src/img';
-
-// Minify any new images
 gulp.task('images', function() {
-
-	// Add the newer pipe to pass through newer images only
-	return gulp.src(imgSrc)
-		.pipe(newer(imgDest))
-		.pipe(imagemin())
-		.pipe(gulp.dest(imgDest));
+    return gulp.src(imgSrc)
+        .pipe(newer(imgDist))
+        .pipe(imagemin())
+        .pipe(gulp.dest(imgDist));
 });
 
 
-//Watch task
-gulp.task("watch", ["browserSync", "sass"], function() {
-	gulp.watch('src/scss/*.scss', ['sass']);
-	gulp.watch('src/*.**', ['imagemin']);
-	gulp.watch("./*.html").on("change", browserSync.reload);
+gulp.task('default', function() {
+    gulp.watch('./src/css/*.css', ['css']);
+    gulp.watch('./src/img/**', ['images']);
 });
