@@ -1,4 +1,4 @@
-# base
+# Base
 
 Repositorio base para cualquiera de mis proyectos.
 
@@ -18,3 +18,24 @@ Creando la carpeta y lanzando el alias ```initproject```
 Completando la instalación de las dependencias y actualizandolas al instante.
 
   ![](https://github.com/jorgeatgu/base/blob/master/initproject-dos.gif)
+
+### dependencias
+
+**browser-sync**
+**gulp**
+**gulp-autoprefixer**
+**gulp-cssnano**
+**gulp-imagemin**
+**gulp-newer**
+**gulp-notify**
+**gulp-postcss**
+**gulp-rename**
+**gulp-sourcemaps**
+**gulp-uglify**
+**npm-check-updates**
+**postcss-cssnext**
+**postcss-import**
+**postcss-inline-comment**
+**postcss-nested**
+**postcss-pxtorem**
+**postcss-sorting**
