@@ -19,7 +19,7 @@ Completando la instalación de las dependencias y actualizandolas al instante.
 
   ![](https://github.com/jorgeatgu/base/blob/master/initproject-dos.gif)
 
-### dependencias
+### Dependencias
 
 **browser-sync**
 **gulp**
