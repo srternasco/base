@@ -22,20 +22,37 @@ Completando la instalación de las dependencias y actualizandolas al instante.
 ### Dependencias
 
 **browser-sync**
+
 **gulp**
+
 **gulp-autoprefixer**
+
 **gulp-cssnano**
+
 **gulp-imagemin**
+
 **gulp-newer**
+
 **gulp-notify**
+
 **gulp-postcss**
+
 **gulp-rename**
+
 **gulp-sourcemaps**
+
 **gulp-uglify**
+
 **npm-check-updates**
+
 **postcss-cssnext**
+
 **postcss-import**
+
 **postcss-inline-comment**
+
 **postcss-nested**
+
 **postcss-pxtorem**
+
 **postcss-sorting**
