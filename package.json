@@ -1,7 +1,7 @@
 {
   "name": "Base",
   "version": "2.0.0",
-  "description": "Gulp base es mi gulp principal, el más actualizado y el básico para iniciar cualquier proyecto",
+  "description": "Gulp base es mi gulp principal, el más actualizado y el fundamental para iniciar cualquier proyecto",
   "main": "gulpfile.js",
   "keywords": [
     "jekyll",
@@ -11,7 +11,7 @@
     "tserver": "browser-sync start --server --files '*.css, *.html' --tunnel jorgeatgu"
   },
   "author": "Jorge Aznar",
-  "license": "ISC",
+  "license": "MIT",
   "devDependencies": {
     "browser-sync": "^2.11.2",
     "gulp": "^3.9.0",
