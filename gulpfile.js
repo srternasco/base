@@ -48,7 +48,6 @@ gulp.task('compress', function() {
         .pipe(notify({
             message: 'JavaScript complete'
         }));
-
 });
 
 gulp.task('css', function() {
@@ -117,3 +116,5 @@ gulp.task('default', function() {
     gulp.watch('./src/css/*.css', ['css']);
     gulp.watch('./src/img/**', ['images']);
 });
+
+gulp.task('build', ['minify', 'compress']);
