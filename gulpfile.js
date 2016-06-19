@@ -13,6 +13,8 @@ newer = require('gulp-newer');
 rename = require('gulp-rename');
 nano = require('gulp-cssnano');
 notify = require("gulp-notify");
+stylelint = require('stylelint');
+reporter = require('postcss-reporter');
 
 var stylelintConfig = {
     "rules": {
@@ -188,6 +190,10 @@ gulp.task('css', function() {
         atImport,
         nested,
         cssnext,
+        stylelint(stylelintConfig),
+        reporter({
+            clearMessages: true
+        }),
         pxtorem({
             root_value: 16,
             unit_precision: 2,
