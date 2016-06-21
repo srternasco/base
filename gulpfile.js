@@ -54,12 +54,12 @@ gulp.task('compress', function() {
 gulp.task('css', function() {
   var processors = [
     atImport,
-    nested,
-    cssnext,
     stylelint(),
     reporter({
       clearMessages: true
     }),
+    nested,
+    cssnext,
     pxtorem({
       root_value: 16,
       unit_precision: 2,
