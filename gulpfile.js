@@ -10,7 +10,6 @@ pxtorem = require('postcss-pxtorem');
 reporter = require('postcss-reporter');
 uglify = require('gulp-uglify');
 newer = require('gulp-newer');
-rename = require('gulp-rename');
 nano = require('gulp-cssnano');
 notify = require("gulp-notify");
 stylelint = require('stylelint');
