@@ -3,18 +3,17 @@ postcss = require('gulp-postcss');
 autoprefixer = require('gulp-autoprefixer');
 sourcemaps = require('gulp-sourcemaps');
 atImport = require('postcss-import');
-postCSS_InlineComment = require('postcss-inline-comment');
 cssnext = require('postcss-cssnext');
 sorting = require('postcss-sorting');
 nested = require('postcss-nested');
 pxtorem = require('postcss-pxtorem');
+reporter = require('postcss-reporter');
 uglify = require('gulp-uglify');
 newer = require('gulp-newer');
 rename = require('gulp-rename');
 nano = require('gulp-cssnano');
 notify = require("gulp-notify");
 stylelint = require('stylelint');
-reporter = require('postcss-reporter');
 
 var imgSrc = './src/img/*';
 var imgDist = './img';
@@ -32,7 +31,6 @@ function errorAlertJS(error) {
   console.log(error.toString());
   this.emit("end");
 };
-
 
 //Notificando errores de CSS
 function errorAlertPost(error) {
@@ -55,7 +53,6 @@ gulp.task('compress', function() {
       message: 'JavaScript complete'
     }));
 });
-
 
 //Lanzando postCSS. El orden de los plugins debe ser respetado
 gulp.task('css', function() {
@@ -115,8 +112,6 @@ gulp.task('imagemin', function() {
     }))
     .pipe(gulp.dest(imgDist));
 });
-
-
 
 gulp.task('images', function() {
   return gulp.src(imgSrc)
