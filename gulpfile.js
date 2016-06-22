@@ -14,13 +14,14 @@ nano = require('gulp-cssnano');
 notify = require("gulp-notify");
 stylelint = require('stylelint');
 
+
+/* Variables */
 var imgSrc = './src/img/*';
 var imgDist = './img';
 var jsSrc = './src/js/*.js';
 var jsDist = './js';
 
-
-//Notificando errores de JavaScript
+/* Notificando errores de JavaScript */
 function errorAlertJS(error) {
   notify.onError({
     title: "Gulp JavaScript",
@@ -31,7 +32,7 @@ function errorAlertJS(error) {
   this.emit("end");
 };
 
-//Notificando errores de CSS
+/* Notificando errores de CSS */
 function errorAlertPost(error) {
   notify.onError({
     title: "Gulp postCSS",
@@ -42,7 +43,7 @@ function errorAlertPost(error) {
   this.emit("end");
 };
 
-//Comprimiendo JavaScript
+/* Comprimiendo JavaScript */
 gulp.task('compress', function() {
   return gulp.src(jsSrc)
     .pipe(uglify())
@@ -53,14 +54,26 @@ gulp.task('compress', function() {
     }));
 });
 
-//Lanzando postCSS. El orden de los plugins debe ser respetado
+/* ==========================================================================
+   Lanzando postCSS
+   ========================================================================== */
+
+/*
+ * El orden de los plugins debe ser respetado.
+ *
+ * Antes de que nuestro CSS empiece a ser transformado por los diferentes
+ * plugins vamos a 'lintear' nuestro CSS para seguir un orden y concierto.
+ * este párrafo.
+ *
+ */
+
 gulp.task('css', function() {
   var processors = [
-    atImport,
     stylelint(),
     reporter({
       clearMessages: true
     }),
+    atImport,
     nested,
     cssnext,
     pxtorem({
@@ -89,7 +102,7 @@ gulp.task('css', function() {
     }));
 });
 
-//Lanzando CSSnano para comprimir CSS
+/* Lanzando CSSnano para comprimir CSS */
 gulp.task('minify', function() {
   return gulp.src('./css/styles.css')
     .pipe(nano())
@@ -99,7 +112,7 @@ gulp.task('minify', function() {
     }));
 });
 
-//Comprimiendo imagenes
+/* Comprimiendo imagenes */
 gulp.task('imagemin', function() {
   return gulp.src(imgSrc)
     .pipe(imagemin({
@@ -119,11 +132,11 @@ gulp.task('images', function() {
     .pipe(gulp.dest(imgDist));
 });
 
-//Tarea por defecto para compilar CSS y comprimir imagenes
+/* Tarea por defecto para compilar CSS y comprimir imagenes */
 gulp.task('default', function() {
   gulp.watch('./src/css/*.css', ['css']);
   gulp.watch('./src/img/**', ['images']);
 });
 
-//Tarea final para comprimir CSS y JavaScript
+/* Tarea final para comprimir CSS y JavaScript */
 gulp.task('build', ['minify', 'compress']);
