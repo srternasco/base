@@ -13,6 +13,15 @@ newer = require('gulp-newer');
 nano = require('gulp-cssnano');
 notify = require("gulp-notify");
 stylelint = require('stylelint');
+browserSync = require("browser-sync");
+
+gulp.task("browserSync", function() {
+  browserSync({
+    server: {
+      baseDir: "./"
+    }
+  })
+});
 
 
 /* Variables */
@@ -133,9 +142,10 @@ gulp.task('images', function() {
 });
 
 /* Tarea por defecto para compilar CSS y comprimir imagenes */
-gulp.task('default', function() {
+gulp.task('default', ["browserSync"], function() {
   gulp.watch('./src/css/*.css', ['css']);
   gulp.watch('./src/img/**', ['images']);
+  gulp.watch(["./*.html", "css/*.css"]).on("change", browserSync.reload);
 });
 
 /* Tarea final para comprimir CSS y JavaScript */
