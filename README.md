@@ -18,12 +18,7 @@ Plugins:
 ```
 /
 ├─ src/              # Master
-│  ├─ css/
-│  │  ├─ icons/      # Favicon and home screen icons
-│  │  ├─ images/     # Raster images (used in component examples)
-│  │  ├─ scripts/    # JavaScript files
-│  │  ├─ styles/     # CSS files
-│  │  └─ vectors/    # SVG images, icons and logos
+│  ├─ css/           # Estilos
 │  ├─ img/           # Imágenes
 │  └─ js/            # JavaScript
 │
