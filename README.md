@@ -36,7 +36,7 @@ Plugins:
 
 ### Bash
 
-```
+```bash
 # Creando estructura de directorios y archivos para iniciar un proyecto desde cero
 function initcss() {
   mkdir $1 &&
