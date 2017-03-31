@@ -1,14 +1,14 @@
 {
-  "name": "jorgeatgu-init",
+  "name": "base",
   "version": "2.0.0",
   "description": "Base para cualquier proyecto de Jorge Aznar, front/design en Zaragoza ⦉ http://jorgeatgu.com ⦊",
   "main": "gulpfile.js",
-  "repository": {
-    "type": "git"
-  },
+  "repository": "jorgeatgu/base",
   "keywords": [
-    "Base",
-    "postcss"
+    "css",
+    "postcss",
+    "gulp",
+    "init"
   ],
   "author": "Jorge Aznar",
   "scripts": {
