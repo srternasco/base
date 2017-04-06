@@ -1,7 +1,7 @@
 {
   "name": "base",
   "version": "2.0.0",
-  "description": "Base para cualquier proyecto de Jorge Aznar, front/design en Zaragoza ⦉ http://jorgeatgu.com ⦊",
+  "description": "Base para cualquier proyecto de Jorge Aznar, front/designer en Zaragoza ⦉ http://jorgeatgu.com ⦊",
   "main": "gulpfile.js",
   "repository": "jorgeatgu/base",
   "keywords": [
