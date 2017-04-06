@@ -16,6 +16,9 @@ Plugins:
 
 [Un artículo sobre la función de bash que inicia toda la magia](http://jorgeatgu.com/blog/iniciando-proyectos-desde-cero/)
 
+[GIF](http://jorgeatgu.com/ejemplos/initcss-parte-una.gif)
+[GIF](http://jorgeatgu.com/ejemplos/initcss-parte-dos.gif)
+
 ### Estructura
 
 ```
