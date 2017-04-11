@@ -16,8 +16,7 @@ nano = require('gulp-cssnano');
 notify = require('gulp-notify');
 stylelint = require('stylelint');
 browserSync = require('browser-sync');
-replace = require('gulp-replace');
-fs = require('fs');
+inlinesource = require('gulp-inline-source');
 
 gulp.task("browserSync", function() {
   browserSync({
@@ -145,13 +144,11 @@ gulp.task('images', function() {
     .pipe(gulp.dest(imgDist));
 });
 
-gulp.task('inline', function() {
+
+gulp.task('inline', function () {
     return gulp.src('./*.html')
-    .pipe(replace(/<link href="style.css"[^>]*>/, function(s) {
-        var style = fs.readFileSync('style.css', 'utf8');
-        return '<style>\n' + style + '\n</style>';
-    }))
-    .pipe(gulp.dest('./'));
+        .pipe(inlinesource())
+        .pipe(gulp.dest('./'));
 });
 
 
