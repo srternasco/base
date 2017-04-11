@@ -12,12 +12,13 @@
   ],
   "author": "Jorge Aznar",
   "lint-staged": {
-   "*.css": "stylelint"
+    "*.css": "stylelint"
   },
   "pre-commit": "lint-staged",
   "scripts": {
     "server-on": "browser-sync start --server --files '*.css, *.html' --tunnel jorgeatgu",
-    "lint-staged": "lint-staged"
+    "lint-staged": "lint-staged",
+    "inline:css": "inline"
   },
   "license": "MIT",
   "devDependencies": {
@@ -29,7 +30,7 @@
     "gulp-newer": "^1.3.0",
     "gulp-notify": "^3.0.0",
     "gulp-postcss": "^6.4.0",
-    "gulp-smoosher": "0.0.9",
+    "gulp-replace": "^0.5.4",
     "gulp-sourcemaps": "^2.5.0",
     "gulp-uglify": "^2.1.2",
     "lint-staged": "^3.4.0",

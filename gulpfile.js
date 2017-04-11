@@ -16,8 +16,8 @@ nano = require('gulp-cssnano');
 notify = require('gulp-notify');
 stylelint = require('stylelint');
 browserSync = require('browser-sync');
-smoosher = require('gulp-smoosher');
-
+replace = require('gulp-replace');
+fs = require('fs');
 
 gulp.task("browserSync", function() {
   browserSync({
@@ -145,6 +145,16 @@ gulp.task('images', function() {
     .pipe(gulp.dest(imgDist));
 });
 
+gulp.task('inline', function() {
+    return gulp.src('./*.html')
+    .pipe(replace(/<link href="style.css"[^>]*>/, function(s) {
+        var style = fs.readFileSync('style.css', 'utf8');
+        return '<style>\n' + style + '\n</style>';
+    }))
+    .pipe(gulp.dest('./'));
+});
+
+
 /* Tarea por defecto para compilar CSS y comprimir imagenes */
 gulp.task('default', ["browserSync"], function() {
   gulp.watch('./src/css/**', ['css']);
@@ -156,10 +166,5 @@ gulp.task('default', ["browserSync"], function() {
 /* Tarea final para comprimir CSS y JavaScript */
 gulp.task('build', ['minify', 'compress']);
 
-/* Tarea para meter todos los estilos entre etiquetas <style> */
+/* Tarea para meter todos los estilos entre etiquetas <style> si el CSS ocupa menos de 50kb */
 
-gulp.task('inline', function () {
-    gulp.src('*.html')
-    .pipe(smoosher())
-    .pipe(gulp.dest('dist'));
-});
