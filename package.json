@@ -18,7 +18,8 @@
   "scripts": {
     "server-on": "browser-sync start --server --files '*.css, *.html' --tunnel jorgeatgu",
     "lint-staged": "lint-staged",
-    "inline:css": "gulp inline"
+    "inline:css": "gulp inline",
+    "remove:uncss": "gulp remove"
   },
   "license": "MIT",
   "devDependencies": {
@@ -33,6 +34,7 @@
     "gulp-postcss": "^6.4.0",
     "gulp-sourcemaps": "^2.5.0",
     "gulp-uglify": "^2.1.2",
+    "gulp-uncss": "^1.0.6",
     "lint-staged": "^3.4.0",
     "postcss-custom-properties": "^5.0.2",
     "postcss-custom-selectors": "^3.0.0",
