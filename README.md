@@ -22,7 +22,7 @@ Plugins:
 ### Estructura
 
 ```
-/
+
 ├─ src/              # Master
 │  ├─ css/           # Estilos
 │  ├─ img/           # Imágenes
@@ -32,7 +32,9 @@ Plugins:
 ├─ js/               # JavaScript para producción
 ├─ img/              # Imágenes optimizadas para producción
 ├─ .gitignore        # Lista de archivos excluídos en Git
+├─ .stylelintignore  # Lista de archivos que no serán linteados por Stylelint
 ├─ .stylelintrc      # Linteando en modo espartano
+├─ index.html        # HTML básico
 ├─ gulpfile.js       # Gulp!
 └─ package.json      # Dependencias
 ```
