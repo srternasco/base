@@ -16,12 +16,9 @@ Plugins:
 
 [Un artículo sobre la función de bash que inicia toda la magia](http://jorgeatgu.com/blog/iniciando-proyectos-desde-cero/)
 
-[GIF](http://jorgeatgu.com/ejemplos/initcss-parte-una.gif)
-[GIF](http://jorgeatgu.com/ejemplos/initcss-parte-dos.gif)
-
 ### Estructura
 
-```
+```bash
 
 ├─ src/              # Master
 │  ├─ css/           # Estilos
@@ -44,48 +41,15 @@ Plugins:
 ```bash
 # Creando estructura de directorios y archivos para iniciar un proyecto desde cero
 function initcss() {
-  mkdir $1 &&
-  cd $1 &&
-  mkdir css src js img &&
-  touch .gitignore &&
-  echo node_modules > .gitignore &&
-  curl -O "https://raw.githubusercontent.com/jorgeatgu/base/master/{.stylelintrc,package.json,gulpfile.js}" &&
-  touch index.html &&
-  cd src &&
-  mkdir css img js &&
-  cd css &&
-  curl -O https://raw.githubusercontent.com/necolas/normalize.css/master/normalize.css &&
-  mv normalize.css _reset.css &&
-  touch _variables.css &&
-  curl -O https://raw.githubusercontent.com/jorgeatgu/base/master/styles.css
-  cd ../js &&
-  touch index.js &&
-  cd .. &&
-  cd .. &&
-  git init &&
-  git add . &&
-  git commit -m 'estructura creada' &&
-  npm i &&
-  git commit -m 'dependencias instaladas' &&
-  npm-check -u &&
-  osascript -e'
-  display notification "A picar código! 🤓 ⚒" with title "InitCSS completado"'
-}
-
-# Iniciando la estructura desde un repositorio ya creado o con la carpeta ya creada
-function initcss-wf() {
-  mkdir css src js img &&
-  touch .gitignore &&
-    echo node_modules > .gitignore &&
-    curl -O "https://raw.githubusercontent.com/jorgeatgu/base/master/{.stylelintrc,package.json,gulpfile.js}" &&
-    touch index.html &&
+    mkdir $1 &&
+    cd $1 &&
+    mkdir css src js img &&
+    curl -O "https://raw.githubusercontent.com/jorgeatgu/base/master/{.stylelintrc,.gitignore,.styelintignore,package.json,gulpfile.js,index.html,_variables.css,styles.css}" &&
     cd src &&
     mkdir css img js &&
     cd css &&
     curl -O https://raw.githubusercontent.com/necolas/normalize.css/master/normalize.css &&
     mv normalize.css _reset.css &&
-    touch _variables.css &&
-    curl -O https://raw.githubusercontent.com/jorgeatgu/base/master/styles.css
     cd ../js &&
     touch index.js &&
     cd .. &&
@@ -100,6 +64,25 @@ function initcss-wf() {
     display notification "A picar código! 🤓 ⚒" with title "InitCSS completado"'
 }
 
-
-
-
+# Iniciando la estructura desde un repositorio ya creado o con la carpeta ya creada
+function initcss-wf() {
+    mkdir css src js img &&
+    curl -O "https://raw.githubusercontent.com/jorgeatgu/base/master/{.stylelintrc,.gitignore,.styelintignore,package.json,gulpfile.js,index.html,_variables.css,styles.css}" &&
+    cd src &&
+    mkdir css img js &&
+    cd css &&
+    curl -O https://raw.githubusercontent.com/necolas/normalize.css/master/normalize.css &&
+    mv normalize.css _reset.css &&
+    cd ../js &&
+    touch index.js &&
+    cd .. &&
+    cd .. &&
+    git init &&
+    git add . &&
+    git commit -m 'estructura creada' &&
+    npm i &&
+    git commit -m 'dependencias instaladas' &&
+    npm-check -u &&
+    osascript -e'
+    display notification "A picar código! 🤓 ⚒" with title "InitCSS completado"'
+}
