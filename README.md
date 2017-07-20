@@ -1,20 +1,10 @@
 # initCSS
 
-Esta es la base de CSS para iniciar cualquier proyecto con postCSS.
+Esta es la base de **CSS** para iniciar cualquier proyecto personal con **postCSS** y **Gulp**.
 
-Plugins:
+Puedes clonar el repositorio y ejecutar un `npm i` o también puedes descargarte la función `initCSS.sh` y ejecutarla en tu terminal con `bash \ruta\initCSS.sh`
 
-* postcss-custom-properties
-* postcss-custom-selectors
-* postcss-import
-* postcss-nested
-* postcss-pxtorem
-* postcss-reporter
-* postcss-sorting
-* stylelint
-
-
-[Un artículo sobre la función de bash que inicia toda la magia](http://jorgeatgu.com/blog/iniciando-proyectos-desde-cero/)
+La estructura de archivos es la que puedes ver a continuación
 
 ### Estructura
 
@@ -36,53 +26,23 @@ Plugins:
 └─ package.json      # Dependencias
 ```
 
-### Bash
+### CSS
 
-```bash
-# Creando estructura de directorios y archivos para iniciar un proyecto desde cero
-function initcss() {
-    mkdir $1 &&
-    cd $1 &&
-    mkdir css src js img &&
-    curl -O "https://raw.githubusercontent.com/jorgeatgu/base/master/{.stylelintrc,.gitignore,.styelintignore,package.json,gulpfile.js,index.html,_variables.css,styles.css}" &&
-    cd src &&
-    mkdir css img js &&
-    cd css &&
-    curl -O https://raw.githubusercontent.com/necolas/normalize.css/master/normalize.css &&
-    mv normalize.css _reset.css &&
-    cd ../js &&
-    touch index.js &&
-    cd .. &&
-    cd .. &&
-    git init &&
-    git add . &&
-    git commit -m 'estructura creada' &&
-    npm i &&
-    git commit -m 'dependencias instaladas' &&
-    npm-check -u &&
-    osascript -e'
-    display notification "A picar código! 🤓 ⚒" with title "InitCSS completado"'
-}
+Para escribir **CSS** uso **postCSS**, los plugins que utilizo son los siguientes:
 
-# Iniciando la estructura desde un repositorio ya creado o con la carpeta ya creada
-function initcss-wf() {
-    mkdir css src js img &&
-    curl -O "https://raw.githubusercontent.com/jorgeatgu/base/master/{.stylelintrc,.gitignore,.styelintignore,package.json,gulpfile.js,index.html,_variables.css,styles.css}" &&
-    cd src &&
-    mkdir css img js &&
-    cd css &&
-    curl -O https://raw.githubusercontent.com/necolas/normalize.css/master/normalize.css &&
-    mv normalize.css _reset.css &&
-    cd ../js &&
-    touch index.js &&
-    cd .. &&
-    cd .. &&
-    git init &&
-    git add . &&
-    git commit -m 'estructura creada' &&
-    npm i &&
-    git commit -m 'dependencias instaladas' &&
-    npm-check -u &&
-    osascript -e'
-    display notification "A picar código! 🤓 ⚒" with title "InitCSS completado"'
-}
+* postcss-custom-properties
+* postcss-custom-selectors
+* postcss-import
+* postcss-nested
+* postcss-pxtorem
+* postcss-reporter
+* postcss-sorting
+* stylelint
+
+### Gulp
+
+La tarea por defecto compila **CSS** con **postCSS**, minifica cualquier tipo de imagen. Y lanza un servidor con **browserSync**. Siempre que se hace algún cambio en la carpeta de JS, CSS o cualquier **HTML** se refresca la página. También *linteo* los **CSS** con una serie de directrices que puedes ver comentadas en el archivo `.stylelintrc`. Antes de subir los cambios a Git con `lint-staged` compruebo que los **CSS** cumplen a rajatabla todas las reglas de **Stylelint**, en el momento que no cumpla una regla no me deja comitear a mi repositorio de Git. Un poco de rectitud no viene mal.
+
+Para acabar y antes de subir los cambios ejecuto la tarea build. Primero comprimo los **CSS** y **JavaScript**, elimino el **CSS** que no utilizo y lo meto en línea.
+
+[Un artículo sobre la función de bash que inicia toda la magia](http://jorgeatgu.com/blog/iniciando-proyectos-desde-cero/)
