@@ -172,12 +172,11 @@ gulp.task('removecss', function() {
 /* Tarea por defecto para compilar CSS y comprimir imagenes */
 gulp.task('default', ["browserSync"], function() {
     gulp.watch('./src/css/**', ['css']);
-    gulp.watch('./src/js/**', ['compress']);
     gulp.watch('./src/img/**', ['images']);
     gulp.watch(["./*.html", "css/*.css", "js/*.js"]).on("change", browserSync.reload);
 });
 
 /* Tarea final para comprimir CSS y JavaScript */
-gulp.task('build', ['minify', 'compress']);
+gulp.task('build', ['minify', 'compress', 'removecss', 'inline']);
 
 /* Tarea para meter todos los estilos entre etiquetas <style> si el CSS ocupa menos de 50kb */
