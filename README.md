@@ -1,6 +1,8 @@
 # initCSS
 
-Esta es la base de CSS para iniciar cualquier proyecto con postCSS.
+Esta es la base de CSS para iniciar cualquier proyecto con postCSS y Gulp.
+
+Puedes clonar el repositorio o ejecutar en tu terminal la función de Bash 
 
 Plugins:
 
