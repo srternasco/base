@@ -23,7 +23,7 @@
   },
   "license": "MIT",
   "devDependencies": {
-    "browser-sync": "^2.18.12",
+    "browser-sync": "^2.18.13",
     "gulp": "^3.9.1",
     "gulp-autoprefixer": "^4.0.0",
     "gulp-cssnano": "^2.1.2",
@@ -35,15 +35,15 @@
     "gulp-sourcemaps": "^2.6.0",
     "gulp-uglify": "^3.0.0",
     "gulp-uncss": "^1.0.6",
-    "lint-staged": "^4.0.0",
-    "postcss-custom-properties": "^6.0.1",
+    "lint-staged": "^4.0.2",
+    "postcss-custom-properties": "^6.1.0",
     "postcss-custom-selectors": "^4.0.1",
     "postcss-import": "^10.0.0",
-    "postcss-nested": "^2.0.2",
+    "postcss-nested": "^2.0.4",
     "postcss-pxtorem": "^4.0.1",
     "postcss-reporter": "^4.0.0",
-    "postcss-sorting": "^3.0.0",
+    "postcss-sorting": "^3.0.1",
     "pre-commit": "^1.2.2",
-    "stylelint": "^7.11.1"
+    "stylelint": "^8.0.0"
   }
 }
