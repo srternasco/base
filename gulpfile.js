@@ -18,6 +18,7 @@ stylelint = require('stylelint');
 browserSync = require('browser-sync');
 inlinesource = require('gulp-inline-source');
 uncss = require('gulp-uncss');
+webp = require('gulp-webp');
 
 gulp.task("browserSync", function() {
     browserSync({
@@ -169,6 +170,12 @@ gulp.task('removecss', function() {
         }));
 });
 
+gulp.task('webp', () =>
+    gulp.src('src/img/*.jpg')
+        .pipe(webp())
+        .pipe(gulp.dest('img'))
+);
+
 /* Tarea por defecto para compilar CSS y comprimir imagenes */
 gulp.task('default', ["browserSync"], function() {
     gulp.watch('./src/css/**', ['css']);
@@ -178,5 +185,3 @@ gulp.task('default', ["browserSync"], function() {
 
 /* Tarea final para comprimir CSS y JavaScript */
 gulp.task('build', ['minify', 'compress', 'removecss', 'inline']);
-
-/* Tarea para meter todos los estilos entre etiquetas <style> si el CSS ocupa menos de 50kb */
