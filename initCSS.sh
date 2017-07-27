@@ -33,4 +33,3 @@ function initCSS() {
         say El script ha terminado. Es hora de picar código!
     fi
 }
-
