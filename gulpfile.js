@@ -122,6 +122,7 @@ gulp.task('css', function() {
 /* Lanzando CSSnano para comprimir CSS */
 gulp.task('minify', function() {
     return gulp.src('./css/styles.css')
+    //Remove comments false //Z index
         .pipe(nano())
         .pipe(gulp.dest('./css'))
         .pipe(notify({
@@ -211,6 +212,7 @@ gulp.task('imgrwd', function () {
 
 /* Tarea por defecto para compilar CSS y comprimir imagenes */
 gulp.task('default', ["browserSync"], function() {
+    //Add interval to watcher!
     gulp.watch('./src/css/**', ['css']);
     gulp.watch('./src/img/**', ['images']);
     gulp.watch('./src/js/**', ['compress']);
