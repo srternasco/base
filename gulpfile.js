@@ -21,19 +21,38 @@ uncss = require('gulp-uncss');
 webp = require('gulp-webp');
 // responsive = require('gulp-responsive');
 
+var paths = {
+  js: 'src/js',
+  css: 'src/css',
+  images: 'src/img/*',
+  buildCss: 'css',
+  buildJs: 'js',
+  buildImages: 'img'
+};
+
+var watch = {
+  js: [
+    paths.js + '/**/*.js'
+  ],
+  css: [
+    paths.css + '/**/*.css'
+  ],
+  images: [
+    paths.images + '/**/*.*'
+  ],
+  html: [
+  './*.html'
+  ]
+};
+
 gulp.task("browserSync", function() {
     browserSync({
         server: {
-            baseDir: "./"
+            baseDir: "./",
+            reloadDelay: 2000
         }
     })
 });
-
-/* Variables */
-var imgSrc = './src/img/*';
-var imgDist = './img';
-var jsSrc = './src/js/*.js';
-var jsDist = './js';
 
 /* Notificando errores de JavaScript */
 function errorAlertJS(error) {
@@ -59,10 +78,10 @@ function errorAlertPost(error) {
 
 /* Comprimiendo JavaScript */
 gulp.task('compress', function() {
-    return gulp.src(jsSrc)
+    return gulp.src(paths.js)
         .pipe(uglify())
         .on("error", errorAlertJS)
-        .pipe(gulp.dest(jsDist))
+        .pipe(gulp.dest(paths.buildJs))
         .pipe(notify({
             message: 'JavaScript complete'
         }));
@@ -105,7 +124,7 @@ gulp.task('css', function() {
         }),
         autoprefixer
     ];
-    return gulp.src('./src/css/styles.css')
+    return gulp.src(paths.css)
 
     .pipe(sourcemaps.init())
         .pipe(postcss(processors))
@@ -113,7 +132,8 @@ gulp.task('css', function() {
         .pipe(sourcemaps.write('./', {
             sourceRoot: '/src'
         }))
-        .pipe(gulp.dest('./css'))
+        .pipe(gulp.dest(paths.buildCss))
+        .pipe(browserSync.stream())
         .pipe(notify({
             message: 'postCSS complete'
         }));
@@ -124,7 +144,7 @@ gulp.task('minify', function() {
     return gulp.src('./css/styles.css')
     //Remove comments false //Z index
         .pipe(nano())
-        .pipe(gulp.dest('./css'))
+        .pipe(gulp.dest(paths.buildCss))
         .pipe(notify({
             message: 'CSSnano task complete'
         }));
@@ -132,7 +152,7 @@ gulp.task('minify', function() {
 
 /* Comprimiendo imagenes */
 gulp.task('imagemin', function() {
-    return gulp.src(imgSrc)
+    return gulp.src(paths.images)
         .pipe(imagemin({
             progressive: true,
             svgoPlugins: [{
@@ -140,14 +160,14 @@ gulp.task('imagemin', function() {
             }],
             use: [pngquant()]
         }))
-        .pipe(gulp.dest(imgDist));
+        .pipe(gulp.dest(paths.buildImages));
 });
 
 gulp.task('images', function() {
-    return gulp.src(imgSrc)
-        .pipe(newer(imgDist))
+    return gulp.src(paths.images)
+        .pipe(newer(paths.buildImages))
         .pipe(imagemin())
-        .pipe(gulp.dest(imgDist));
+        .pipe(gulp.dest(paths.buildImages));
 });
 
 
@@ -166,7 +186,7 @@ gulp.task('removecss', function() {
             html: ['./*.html']
         }))
         .pipe(nano())
-        .pipe(gulp.dest('./css'))
+        .pipe(gulp.dest(paths.buildCss))
         .pipe(notify({
             message: 'CSSnano & remove CSS task complete'
         }));
@@ -175,7 +195,7 @@ gulp.task('removecss', function() {
 gulp.task('webp', () =>
     gulp.src('img/*.jpg')
         .pipe(webp())
-        .pipe(gulp.dest('img'))
+        .pipe(gulp.dest(paths.buildImages))
 );
 
 // gulp.task('imgrwd', function () {
@@ -213,10 +233,10 @@ gulp.task('webp', () =>
 /* Tarea por defecto para compilar CSS y comprimir imagenes */
 gulp.task('default', ["browserSync"], function() {
     //Add interval to watcher!
-    gulp.watch('./src/css/**', ['css']);
-    gulp.watch('./src/img/**', ['images']);
-    gulp.watch('./src/js/**', ['compress']);
-    gulp.watch(["./*.html", "css/*.css", "js/*.js"]).on("change", browserSync.reload);
+    gulp.watch(watch.css, { interval: 300 }, ['css']);
+    gulp.watch(watch.images, { interval: 300 }, ['images']);
+    gulp.watch(watch.js, { interval: 300 }, ['compress']);
+    gulp.watch([watch.html, watch.css, watch.js]).on("change", browserSync.reload);
 });
 
 /* Tarea final para comprimir CSS y JavaScript. Eliminar el CSS sin usar e incluirlo en línea en el HTML
