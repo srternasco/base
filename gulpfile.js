@@ -25,9 +25,9 @@ var paths = {
   js: 'src/js',
   css: 'src/css',
   images: 'src/img/*',
-  buildCss: 'css',
-  buildJs: 'js',
-  buildImages: 'img'
+  buildCss: 'css/',
+  buildJs: 'js/',
+  buildImages: 'img/'
 };
 
 var watch = {
@@ -41,7 +41,7 @@ var watch = {
     paths.images + '/**/*.*'
   ],
   html: [
-  './*.html'
+  '/*.html'
   ]
 };
 
@@ -124,7 +124,7 @@ gulp.task('css', function() {
         }),
         autoprefixer
     ];
-    return gulp.src(paths.css)
+    return gulp.src('./src/css/styles.css')
 
     .pipe(sourcemaps.init())
         .pipe(postcss(processors))
@@ -236,7 +236,7 @@ gulp.task('default', ["browserSync"], function() {
     gulp.watch(watch.css, { interval: 300 }, ['css']);
     gulp.watch(watch.images, { interval: 300 }, ['images']);
     gulp.watch(watch.js, { interval: 300 }, ['compress']);
-    gulp.watch([watch.html, watch.css, watch.js]).on("change", browserSync.reload);
+    gulp.watch(["./*.html", "css/*.css", "js/*.js"]).on("change", browserSync.reload);
 });
 
 /* Tarea final para comprimir CSS y JavaScript. Eliminar el CSS sin usar e incluirlo en línea en el HTML
