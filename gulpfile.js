@@ -37,6 +37,9 @@ var watch = {
   css: [
     paths.css + '/**/*.css'
   ],
+  minifycss: [
+    paths.buildCss + '/**/*.css'
+  ],
   images: [
     paths.images + '/**/*.*'
   ],
@@ -78,7 +81,7 @@ function errorAlertPost(error) {
 
 /* Comprimiendo JavaScript */
 gulp.task('compress', function() {
-    return gulp.src(paths.js)
+    return gulp.src(watch.js)
         .pipe(uglify())
         .on("error", errorAlertJS)
         .pipe(gulp.dest(paths.buildJs))
@@ -124,7 +127,7 @@ gulp.task('css', function() {
         }),
         autoprefixer
     ];
-    return gulp.src('./src/css/styles.css')
+    return gulp.src(watch.css)
 
     .pipe(sourcemaps.init())
         .pipe(postcss(processors))
@@ -141,7 +144,7 @@ gulp.task('css', function() {
 
 /* Lanzando CSSnano para comprimir CSS */
 gulp.task('minify', function() {
-    return gulp.src('./css/styles.css')
+    return gulp.src(watch.minifycss)
     //Remove comments false //Z index
         .pipe(nano())
         .pipe(gulp.dest(paths.buildCss))
@@ -165,7 +168,7 @@ gulp.task('imagemin', function() {
 
 gulp.task('images', function() {
     return gulp.src(paths.images)
-        .pipe(newer(paths.buildImages))
+        .pipe(newer(paths.images))
         .pipe(imagemin())
         .pipe(gulp.dest(paths.buildImages));
 });
