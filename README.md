@@ -1,27 +1,8 @@
-# initCSS
+# initPROJECT
 
 Esta es la base de **CSS** para iniciar cualquier proyecto personal con **postCSS** y **Gulp**.
 
-Puedes clonar el repositorio y ejecutar un `npm i` o también puedes descargarte la función `initCSS.sh` y ejecutarla en tu terminal con `bash \ruta\initCSS.sh`
-
-# Yeoman por Viroide
-
-Una manera mucha más fácil de instalar y adaptar todo el proyecto a tu workflow es hacerlo a través de Yeoman y una simple dependencia. Miles de gracias a [Jon](https://github.com/viroide) por el trabajo 
-
-[Un artículo de medium explicando toda la movida](https://medium.com/@viroide/un-pequeño-regalo-para-jorge-aznar-38c558e57e95)
-
-El funcionamiento es sencillo, debes instalar yeoman y el generador en cuestión de manera global:
-
-```
-npm i -g yo generator-jorge-atgu
-```
-
-Y después simplemente en la carpeta que quieras crear tu proyecto ejecutas:
-
-```
-yo jorge-atgu
-```
-
+Puedes clonar el repositorio y ejecutar un `npm i` o también puedes descargarte la función `initproject.sh` y ejecutarla en tu terminal con `bash \path\initproject.sh`
 
 ### Estructura
 
